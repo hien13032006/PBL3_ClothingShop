@@ -7,5 +7,6 @@ public class AppDbContext : DbContext
     // Khai báo các bảng
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }
-    
+    public DbSet<Customer> Customer { get; set; }
+
 }
