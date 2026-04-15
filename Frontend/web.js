@@ -334,9 +334,16 @@ function initDetailPage() {
 function renderOptions(selector, data) {
     const container = document.querySelector(selector);
     if (!container) return;
+
+    // Xác định loại dựa trên selector
+    const isColor = selector.includes('color');
+    const type = isColor ? 'color' : 'size';
+    const errorText = isColor ? 'Vui lòng chọn màu sắc' : 'Vui lòng chọn kích thước';
+
+    // Đổ các nút bấm + Thêm thẻ lỗi đồng nhất
     container.innerHTML = data.map(item =>
         `<button class="opt-btn" onclick="selectOption(this)">${item}</button>`
-    ).join('');
+    ).join('') + `<div id="${type}-error" class="error-msg" style="display:none; color:red; font-size:12px; margin-top:5px; font-style:italic;">${errorText}</div>`;
 }
 
 function selectOption(btn) {
@@ -344,11 +351,10 @@ function selectOption(btn) {
     parent.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    // Ẩn lỗi khi đã chọn
-    const errorMsg = parent.nextElementSibling;
-    if (errorMsg && errorMsg.classList.contains('error-msg')) errorMsg.style.display = 'none';
+    // Tìm thẻ lỗi nằm ngay trong container này và ẩn đi
+    const errorMsg = parent.querySelector('.error-msg');
+    if (errorMsg) errorMsg.style.display = 'none';
 }
-
 /* ==========================================================
    4. GIỎ HÀNG & LOGIC
    ========================================================== */
@@ -358,30 +364,65 @@ function addToCart() {
     const productId = parseInt(params.get('id'));
     const product = products.find(p => p.id === productId);
 
+    if (!product) return;
+
     const selectedColor = document.querySelector('#color-options .opt-btn.active');
     const selectedSize = document.querySelector('#size-options .opt-btn.active');
+    const qtyInput = document.getElementById('qty');
+    const quantity = qtyInput ? parseInt(qtyInput.value) : 1;
 
     let valid = true;
-    if (!selectedColor) { document.getElementById('color-error').style.display = 'block'; valid = false; }
-    if (!selectedSize) { document.getElementById('size-error').style.display = 'block'; valid = false; }
+
+    // Kiểm tra màu sắc
+    const colorError = document.getElementById('color-error');
+    if (!selectedColor) {
+        if (colorError) colorError.style.display = 'block';
+        valid = false;
+    }
+
+    // Kiểm tra size
+    const sizeError = document.getElementById('size-error');
+    if (!selectedSize) {
+        if (sizeError) sizeError.style.display = 'block';
+        valid = false;
+    }
 
     if (!valid) return;
 
+    // Tạo object sản phẩm để lưu
     const cartItem = {
         id: product.id,
         name: product.name,
         price: product.price,
+        img: product.img, // Lưu thêm ảnh để hiện ở trang giỏ hàng
         color: selectedColor.innerText,
         size: selectedSize.innerText,
-        quantity: parseInt(document.getElementById('qty').value)
+        quantity: quantity
     };
 
     let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.push(cartItem);
+
+    // Kiểm tra nếu sản phẩm đã tồn tại (cùng ID, cùng màu, cùng size)
+    const existingProductIndex = cart.findIndex(item =>
+        item.id === cartItem.id &&
+        item.color === cartItem.color &&
+        item.size === cartItem.size
+    );
+
+    if (existingProductIndex > -1) {
+        cart[existingProductIndex].quantity += quantity;
+    } else {
+        cart.push(cartItem);
+    }
+
     localStorage.setItem('cart', JSON.stringify(cart));
+    updateCartCount();
 
     showSuccessToast();
-    updateCartCount();
+
+    setTimeout(() => {
+        window.location.href = "giohang.html";
+    }, 800);
 }
 
 function showSuccessToast() {
