@@ -78,6 +78,8 @@ body {
 }
 
     .icon-item {
+        position: relative;
+        display: inline-flex;
         text-decoration: none; /* Bỏ gạch chân link */
         color: #333; /* Màu mặc định của icon */
         font-size: 20px; /* Kích thước icon rộng rãi hơn */
@@ -89,6 +91,25 @@ body {
             color: #ff6b81; /* Đổi màu tùy ý khi hover */
             transform: scale(1.1); /* Phóng to nhẹ khi hover */
         }
+
+/* Style cho con số thông báo */
+.cart-badge {
+    position: absolute;
+    top: -8px; /* Đẩy lên trên icon */
+    right: -10px; /* Đẩy sang phải icon */
+    background-color: #ff4d4d; /* Màu đỏ nổi bật */
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #fff; /* Viền trắng giúp tách biệt với nền */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
 
     /* Định dạng thanh tìm kiếm */
 .search-box {
@@ -948,7 +969,7 @@ body {
 
 .cart-header-grid, .cart-item-row {
     display: grid;
-    grid-template-columns: 4fr 1.5fr 1.5fr 1.5fr 1.5fr;
+    grid-template-columns: 4.5fr 1.7fr 1.5fr 1.5fr 1.5fr;
     padding: 15px;
     align-items: center;
     border-bottom: 1px solid #eee;
@@ -1045,3 +1066,72 @@ body {
     color: #ee4d2d;
     font-weight: bold;
 }
+
+/* Container chính của mỗi dòng sản phẩm */
+.cart-item-row {
+    display: grid;
+    grid-template-columns: 0.5fr 4fr 1.5fr 1.5fr 1.5fr 1.5fr;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Khối ảnh và tên sản phẩm */
+.cart-item-info {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+    .cart-item-info img {
+        width: 100px;
+        height: 100px;
+        border-radius: 12px;
+        object-fit: cover;
+    }
+
+    .cart-item-info p {
+        font-size: 16px;
+        font-weight: 500;
+        margin: 0;
+    }
+
+/* Bộ điều khiển số lượng (Giống ảnh mẫu) */
+.qty-control {
+    display: flex;
+    align-items: center;
+    background: #f2f2f2;
+    border-radius: 25px;
+    width: fit-content;
+    padding: 5px 15px;
+}
+
+    .qty-control button {
+        border: none;
+        background: none;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .qty-control span {
+        width: 40px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+/* Giá tiền và thao tác xóa */
+.cart-item-price {
+    color: red;
+    font-weight: bold;
+    font-size: 16px;
+
+}
+
+.cart-item-action .btn-delete {
+    color: #ff4d4d;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+
