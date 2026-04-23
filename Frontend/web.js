@@ -632,3 +632,49 @@ function updateTotalPrice() {
         totalAmountEl.innerText = totalSelected.toLocaleString('vi-VN') + "đ";
     }
 }
+
+//BOX THÔNG BÁO
+
+// Hàm mở thông báo
+function showModal() {
+    const modal = document.getElementById('custom-alert');
+    if (modal) modal.style.display = 'flex';
+}
+// Hàm đóng tb
+function closeModal() {
+    const modal = document.getElementById('custom-alert');
+    if (modal) modal.style.display = 'none';
+}
+//////////////////
+
+
+//////THANH TOÁN///////
+function checkout() {
+    const selectedCheckboxes = document.querySelectorAll('.item-checkbox:checked');
+
+    //Kiểm tra nếu không có sản phẩm nào được chọn
+    if (selectedCheckboxes.length === 0) {
+        // Gọi hàm hiển thị Modal thông báo
+        const modal = document.getElementById('custom-alert');
+        if (modal) {
+            modal.style.display = 'flex';
+        }
+        return;
+    }
+
+    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+    const selectedItems = [];
+
+    selectedCheckboxes.forEach(checkbox => {
+        const row = checkbox.closest('.cart-item-row');
+        if (row) {
+            const index = row.getAttribute('data-index');
+            if (cart[index]) {
+                selectedItems.push(cart[index]);
+            }
+        }
+    });
+
+    localStorage.setItem('checkoutItems', JSON.stringify(selectedItems));
+    window.location.href = "thanhtoan.html";
+}

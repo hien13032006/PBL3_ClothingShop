@@ -15,17 +15,19 @@
             align-items: center;
             gap: 10px;
         }
-        .logo a {
-            text-decoration: none;
-            font-size: 55px;
-            font-weight: bold;
-            color: #333;
-            letter-spacing: 1px;
-        }
-        .logo span {
-            color: #333;
-            font-weight: 320;
-        }
+
+            .logo a {
+                text-decoration: none;
+                font-size: 55px;
+                font-weight: bold;
+                color: #333;
+                letter-spacing: 1px;
+            }
+
+            .logo span {
+                color: #333;
+                font-weight: 320;
+            }
 
             .logo a:hover {
                 color: #ff6b81;
@@ -37,14 +39,15 @@
             margin-right: 20px;
             margin-bottom: 20px;
         }
-            .search-box {
-                width: 300px;
-            }
-            .nav-icons {
-                margin-left: auto;
-                margin-right:5px;
-            }
 
+        .search-box {
+            width: 300px;
+        }
+
+        .nav-icons {
+            margin-left: auto;
+            margin-right: 5px;
+        }
     </style>
 
     <!--MENU Tiêu đề-->
@@ -93,11 +96,19 @@
                     <div class="total-price-block">
                         Tổng tiền: <span id="cart-total-amount">0đ</span>
                     </div>
-                    <button class="btn-checkout">Thanh toán</button>
+                    <button class="btn-checkout" onclick="checkout()">Mua hàng</button>
                 </div>
             </div>
         </div>
     </main>
+
+    <div id="custom-alert" class="modal-overlay">
+        <div class="modal-box">
+            <h3>Thông báo</h3>
+            <p id="modal-message">Vui lòng chọn ít nhất 1 sản phẩm để tiếp tục thanh toán!</p>
+            <button class="btn-confirm" onclick="closeModal()">Đồng ý</button>
+        </div>
+    </div>
 
     <!--Footer-->
     <footer class="main-footer">

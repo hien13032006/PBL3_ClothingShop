@@ -1135,3 +1135,73 @@ body {
 }
 
 
+/*ĐỊNH DẠNG BOX THÔNG BÁO*/
+/* Lớp nền mờ bao phủ toàn màn hình */
+.modal-overlay {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none; 
+    justify-content: center;
+    align-items: center;
+    z-index: 10000; 
+}
+
+/* Hộp thông báo trắng ở giữa */
+.modal-box {
+    background: #fff;
+    width: 90%;
+    max-width: 400px;
+    max-height:300px;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    animation: popIn 0.3s ease-out;
+}
+
+
+.modal-box h3 {
+    margin: 0 0 10px 0;
+    font-size: 22px;
+    color: #333;
+}
+
+.modal-box p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+/* Nút đồng ý */
+.btn-confirm {
+    background: #ff6b81; /* Khớp với màu nút Mua hàng */
+    color: white;
+    border: none;
+    padding: 10px 40px;
+    border-radius: 25px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+    .btn-confirm:hover {
+        background: #ff4757;
+    }
+
+/* Hiệu ứng hiện ra nhẹ nhàng */
+@keyframes popIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
