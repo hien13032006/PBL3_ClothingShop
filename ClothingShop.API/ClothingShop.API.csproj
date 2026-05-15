@@ -11,16 +11,17 @@
 
   <ItemGroup>
     <!-- JWT Bearer Authentication -->
+    <PackageReference Include="Google.Apis.Auth" Version="1.73.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.5" />
     <!-- EF Core Design (cho dotnet ef migrations) -->
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design"          Version="9.0.5">
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.5">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <!-- Swagger UI -->
-    <PackageReference Include="Swashbuckle.AspNetCore"                        Version="9.0.1" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.1" />
     <!-- BCrypt (dùng trong SeedDataService) -->
-    <PackageReference Include="BCrypt.Net-Next"                               Version="4.0.3" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
   </ItemGroup>
 
   <ItemGroup>
