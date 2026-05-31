@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Thống kê báo cáo - Quản trị viên</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Thongke.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+    <nav class="navbar" style="position: fixed; top: 0; left: 0; width: 100%; z-index: 100; height: 60px; box-sizing: border-box;">
+        <div class="logo">Clothing</div>
+        <div class="nav-main-content">
+            <ul class="nav-links">
+                <li><a href="index_QTV.html">TRANG CHỦ</a></li>
+                <li><a href="danhmuc_QTV.html">SẢN PHẨM</a></li>
+                <li><a href="danhmuc_QTV.html?type=banchay">HOT🔥</a></li>
+                <li><a href="danhmuc_QTV.html?type=moi">SẢN PHẨM MỚI</a></li>
+                <li><a href="danhmuc_QTV.html?type=khuyenmai">KHUYẾN MÃI</a></li>
+
+                <li class="dropdown">
+                    <a href="danhmuc_QTV.html?gender=nam">NAM <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="danhmuc_QTV.html?gender=nam&cat=quan">Quần</a></li>
+                        <li><a href="danhmuc_QTV.html?gender=nam&cat=khoac">Áo khoác</a></li>
+                        <li><a href="danhmuc_QTV.html?gender=nam&cat=somi">Áo sơ mi</a></li>
+                        <li><a href="danhmuc_QTV.html?gender=nam&cat=polo">Áo Polo</a></li>
+                        <li><a href="danhmuc_QTV.html?gender=nam&cat=thun">Áo thun</a></li>
+                    </ul>
+                </li>
+
+                <li class="dropdown">
+                    <a href="danhmuc_QTV.html?gender=nu">NỮ <i class="fa-solid fa-chevron-down"></i></a>
+                    <ul class="dropdown-content">
+                        <li><a href="danhmuc_QTV.html?gender=nu&cat=quan">Quần</a></li>
+                        <li><a href="danhmuc_QTV.html?gender=nu&cat=vaydam">Váy-Đầm</a></li>
+                        <li><a href="danhmuc_QTV.html?gender=nu&cat=khoac">Áo khoác</a></li>
+                        <li><a href="danhmuc_QTV.html?gender=nu&cat=somi">Áo sơ mi</a></li>
+                        <li><a href="danhmuc_QTV.html?gender=nu&cat=kieu">Áo kiểu</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="search-box-container">
+                <div class="search-box">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                    <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="admin-main-layout">
+
+        <aside class="admin-sidebar">
+            <ul class="sidebar-menu">
+                <li>
+                    <a href="index_QTV.html"><i class="fa-solid fa-gauge"></i> Tổng Quan</a>
+                </li>
+                <li>
+                    <a href="danhmuc_QTV.html"><i class="fa-solid fa-tags"></i> Quản Lý Sản Phẩm</a>
+                </li>
+                <li>
+                    <a href="QLĐH.html"><i class="fa-solid fa-box-open"></i> Quản Lý Đơn Hàng</a>
+                </li>
+                <li>
+                    <a href="QLKH.html"><i class="fa-solid fa-users"></i> Quản Lý Khách Hàng</a>
+                </li>
+                <li class="active">
+                    <a href="Thongke.html"><i class="fa-solid fa-chart-line"></i> Thống kê - Báo cáo</a>
+                </li>
+                <li>
+                    <a href="#"><i class="fa-solid fa-ticket"></i> Thiết lập khuyến mãi</a>
+                </li>
+            </ul>
+        </aside>
+
+        <main class="admin-content-container">
+            <header class="main-header">
+                <h2>Tổng quan hệ thống & Báo cáo doanh thu</h2>
+                <div class="user-info">Admin: <strong id="admin-name">Quản trị viên</strong></div>
+            </header>
+
+            <div class="stats-grid" id="stats-container">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fa-solid fa-dollar-sign"></i></div>
+                    <div class="stat-info">
+                        <h3>Doanh thu tháng</h3>
+                        <p>45,000,000 đ</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #ffeaa7; color: #fdcb6e;"><i class="fa-solid fa-shopping-bag"></i></div>
+                    <div class="stat-info">
+                        <h3>Đơn hàng mới</h3>
+                        <p>124 đơn</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background-color: #dff9fb; color: #22a6b3;"><i class="fa-solid fa-user-plus"></i></div>
+                    <div class="stat-info">
+                        <h3>Khách hàng mới</h3>
+                        <p>48 thành viên</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="charts-section">
+                <div class="chart-container">
+                    <h3>Doanh thu theo tháng</h3>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3>Cơ cấu sản phẩm bán chạy</h3>
+                    <canvas id="categoryChart"></canvas>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <footer class="main-footer" style="position: relative; z-index: 101; margin-left: 260px;">
+        <div class="footer-container">
+            <div class="footer-col">
+                <h1 class="footer-logo">Clothing</h1>
+                <p class="footer-slogan">Shop áo quần online</p>
+            </div>
+            <div class="footer-col">
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fa-solid fa-angles-right"></i> Giới thiệu</a></li>
+                    <li><a href="#"><i class="fa-solid fa-angles-right"></i> Liên hệ</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="Thongke.js"></script>
+</body>
+</html>
